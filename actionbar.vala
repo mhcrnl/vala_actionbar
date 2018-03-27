@@ -9,10 +9,30 @@ public class Example : Window
 {
     public Example()
     {
+        // Prepare Gtk.Window:
         this.title = "ActionBar";
+        this.window_position = Gtk.WindowPosition.CENTER;
         this.set_default_size(200, 200);
         this.destroy.connect(Gtk.main_quit);
-
+        
+        // MenuBar:
+        Gtk.MenuBar bar = new Gtk.MenuBar ();
+        this.add (bar);
+        
+        // File:
+        Gtk.MenuItem item_file = new Gtk.MenuItem.with_label ("File");
+        bar.add (item_file);
+        
+        Gtk.Menu filemenu = new Gtk.Menu ();
+        item_file.set_submenu (filemenu);
+        
+        Gtk.MenuItem item_open = new Gtk.MenuItem.with_label ("Open");
+        filemenu.add (item_open);
+        
+        Gtk.MenuItem item_exit = new Gtk.MenuItem.with_label ("Exit");
+        item_exit.activate.connect (Gtk.main_quit);
+        filemenu.add (item_exit);
+        
         var grid = new Grid();
         grid.set_row_spacing(5);
         grid.set_column_spacing(5);
